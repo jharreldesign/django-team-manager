@@ -1,17 +1,24 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static %} <!-- Ensure this line is included -->
+
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/teams/team-detail.css' %}" />
 {% endblock %}
+
 {% block content %}
 <section class="team-container">
     <div class="team-img">
-        <img src="{% static 'images/coach-logo.png' %}" alt="Coaches large logo" />
+        {% if team.logo_url %}
+            <img src="{{ team.logo_url }}" alt="{{ team.name }} Logo" />
+        {% else %}
+            <img src="{% static 'images/coach-logo.png' %}" alt="Default Coaches large logo" />
+        {% endif %}
     </div>
     <div class="team-details">
         <h1>{{ team.name }}</h1>
-        <p><strong>Sport: </strong>{{ team.sport }}</p>
-
+        <p><strong>Sport:</strong> {{ team.sport }}</p>
+        <p><strong>City:</strong> {{ team.city }}</p>
+        <p><strong>Stadium:</strong> {{ team.stadium }}</p>
         <div class="team-actions">
             <a href="{% url 'team-update' team.id %}" class="btn warn">Edit</a>
             <a href="{% url 'team-delete' team.id %}" class="btn danger">Delete</a>
@@ -23,7 +30,6 @@
     <section class="players">
         <div class="subsection-title">
             <h2>Players</h2>
-            <img src="{% static 'images/coach-logo.png' %}" alt="The lovely coach icon" />
         </div>
         <table>
             <thead>

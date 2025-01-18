@@ -1,39 +1,61 @@
 .card-container {
-    padding: 0 30px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  
-  .card {
-    width: 275px;
-    margin: 10px;
-    border: var(--borders);
-    box-shadow: var(--card-box-shadow);
-  }
-  
-  .card-content {
-    padding: 10px;
-    width: 100%;
-  }
-  
-  .usr-img {
-    width: 100%;
-    border-radius: var(--card-border-radius);
-  }
-  
-  .card > a {
-    text-decoration: none;
-    color: var(--text-color);
-  }
-  
-  .card h2 {
-    margin: 10px 0;
-    font-size: var(--font-xl);
-  }
-  
-  .card p {
-    margin: 5px 0;
-    font-size: var(--font-reg);
-  }
-  
+  padding: 0 30px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px; /* Adds space between cards */
+}
+
+.card {
+  width: 275px;
+  margin: 10px;
+  border: var(--borders);
+  box-shadow: var(--card-box-shadow);
+  border-radius: var(--card-border-radius); /* Smooth edges for the card */
+  overflow: hidden; /* Ensures content stays within the card */
+  background-color: var(--background-color); /* Add background for contrast */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth hover effect */
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--card-hover-box-shadow); /* Slightly lift on hover */
+}
+
+.card-content {
+  padding: 15px;
+  text-align: center; /* Center-align text */
+}
+
+.card-img-container {
+  width: 100%;
+  height: 150px; /* Fixed height for images */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary-background-color); /* Add contrast background */
+  overflow: hidden; /* Ensures image stays within bounds */
+}
+
+.card-img-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Ensures the image scales proportionally */
+  border-radius: var(--card-border-radius); /* Smooth edges for the image */
+}
+
+.card > a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.card h2 {
+  margin: 10px 0;
+  font-size: var(--font-xl);
+}
+
+.card p {
+  margin: 5px 0;
+  font-size: var(--font-reg);
+  color: var(--secondary-text-color); /* Subtle color for descriptions */
+}

@@ -6,12 +6,13 @@ from .models import Team, Schedule
 # Team views
 class TeamCreate(CreateView):
     model = Team
-    fields = '__all__'
+    fields = ['name', 'city', 'stadium', 'sport', 'logo_url']
     success_url = '/teams/'
 
 class TeamUpdate(UpdateView):
     model = Team
-    fields = ["name", "city", "stadium", "sport"]
+    fields = ['name', 'city', 'stadium', 'sport', 'logo_url']
+    success_url = '/teams/'
 
 class TeamDelete(DeleteView):
     model = Team

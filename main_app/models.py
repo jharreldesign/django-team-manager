@@ -9,6 +9,7 @@ class Team(models.Model):
     city = models.CharField(max_length=255)
     stadium = models.CharField(max_length=255)
     sport = models.CharField(max_length=255)
+    logo_url = models.URLField(max_length=500, blank=True, null=True)
 
     def __str__(self):
         return f"{self.name} - {self.city} - {self.stadium} - {self.sport}"
