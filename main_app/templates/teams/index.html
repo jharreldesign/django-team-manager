@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/teams/team-index.css' %}" />
+{% endblock %}
+{% block content %}
+
+<section class="card-container">
+    {% for team in teams %}
+    <div class="card">
+        <a href="{% url 'team-detail' team.id %}">
+            <div class="card-content">
+                <div class="card-img-container">
+                    <img src="{% static 'images/coach-logo.png' %}" alt="Coaches Logo" />
+                </div>
+                <h2 class="card-title">{{ team.city }} {{ team.name }}</h2>
+                <p><strong>Sport: </strong>{{ team.sport }}</p>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</section>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/coach-logo.png' %}">
+
+    <title>Team Manager</title>
+    {% block head %}
+    {% endblock %}
+</head>
+
+<body>
+    <header>
+        <div class="header-logo-container">
+            <a href="/">
+                <!-- <img src="{% static 'images/coach-logo.png' %}" alt="The Team Manager Logo" /> -->
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'team-index' %}">Teams</a></li>
+                <li><a href="{% url 'team-create' %}">Add A Team</a></li>
+                <li><a href="{% url 'schedule-list' %}">View Games</a></li>
+                <li><a href="{% url 'schedule-create' %}">Schedule A Game</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>  <!-- You can keep this if needed -->
+            </ul>
+        </nav>        
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+
+</html>
