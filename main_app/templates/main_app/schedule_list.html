@@ -14,7 +14,12 @@
     <div class="card">
         <a href="{% url 'schedule-detail' schedule.id %}">
             <div class="card-content">
-                <h2>{{ schedule.team.name }} vs {{ schedule.opponent }}</h2>
+                <div class="team-logos">
+                    <img src="{{ schedule.home_team.logo_url }}" alt="{{ schedule.home_team.name }} logo" class="team-logo">
+                    <span>vs</span>
+                    <img src="{{ schedule.away_team.logo_url }}" alt="{{ schedule.away_team.name }} logo" class="team-logo">
+                </div>
+                <h2>{{ schedule.home_team.name }} vs {{ schedule.away_team.name }}</h2>
                 <p>Location: {{ schedule.location }}</p>
                 <p>Arena: {{ schedule.arena }}</p>
                 <p>Date: {{ schedule.game_date }}</p>

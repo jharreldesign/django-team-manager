@@ -7,9 +7,9 @@
 
 {% block content %}
 <div class="page-header">
-    {% if object %}
-    <h1>Edit Game: {{ object.opponent }} vs {{ object.team.name }}</h1>
-    <form action="{% url 'schedule-update' object.id %}" method="post" class="form-container" autocomplete="off">
+    {% if schedule %}
+    <h1>Edit Game: {{ schedule.home_team.name }} vs {{ schedule.away_team.name }}</h1>
+    <form action="{% url 'schedule-update' schedule.id %}" method="post" class="form-container" autocomplete="off">
         {% else %}
         <h1>Add a Game to the Schedule</h1>
         <form action="{% url 'schedule-create' %}" method="post" class="form-container" autocomplete="off">
@@ -17,13 +17,11 @@
             <img src="{% static 'images/coach-logo.png' %}" alt="Coach Logo" />
 </div>
 
-{% if form.errors %}
+{% if form_errors %}
 <div class="error">
     <ul>
-        {% for field in form %}
-        {% for error in field.errors %}
+        {% for error in form_errors %}
         <li>{{ error }}</li>
-        {% endfor %}
         {% endfor %}
     </ul>
 </div>
@@ -33,55 +31,146 @@
     <tr>
         <td>Select Home Team:</td>
         <td>
-            <select name="home" id="home">
+            <select name="home_team" id="home_team">
                 {% for team in teams %}
-                <option value="{{ team.name }}" {% if form.opponent.value==team.name %}selected{% endif %}>{{ team.name
-                    }}</option>
+                <option value="{{ team.id }}" {% if schedule.home_team.id == team.id %}selected{% endif %}>{{ team.name }}</option>
                 {% endfor %}
             </select>
         </td>
     </tr>
     <tr>
-        <td>Select Opponent Team:</td>
+        <td>Select Away Team:</td>
         <td>
-            <select name="opponent" id="opponent">
+            <select name="away_team" id="away_team">
                 {% for team in teams %}
-                <option value="{{ team.name }}" {% if form.opponent.value==team.name %}selected{% endif %}>{{ team.name
-                    }}</option>
+                <option value="{{ team.id }}" {% if schedule.away_team.id == team.id %}selected{% endif %}>{{ team.name }}</option>
                 {% endfor %}
             </select>
         </td>
     </tr>
     <tr>
-        <td>{{ form.location.label_tag }}</td>
-        <td>{{ form.location }}</td>
-    </tr>
-    <tr>
-        <td>{{ form.game_date.label_tag }}</td>
+        <td>Location:</td>
         <td>
-            <input type="date" name="game_date" id="game_date" value="{{ form.game_date.value }}" />
+            <input type="text" name="location" id="location" value="{{ schedule.location }}" />
         </td>
     </tr>
     <tr>
-        <td>{{ form.game_time.label_tag }}</td>
+        <td>Game Date:</td>
+        <td>
+            <input type="date" name="game_date" id="game_date" value="{{ schedule.game_date }}" />
+        </td>
+    </tr>
+    <tr>
+        <td>Game Time:</td>
         <td>
             <select name="game_time" id="game_time">
-                <option value="09:00:00" {% if form.game_time.value=="09:00:00" %}selected{% endif %}>09:00 AM</option>
-                <option value="12:00:00" {% if form.game_time.value=="12:00:00" %}selected{% endif %}>12:00 PM</option>
-                <option value="15:00:00" {% if form.game_time.value=="15:00:00" %}selected{% endif %}>03:00 PM</option>
-                <option value="18:00:00" {% if form.game_time.value=="18:00:00" %}selected{% endif %}>06:00 PM</option>
-                <option value="21:00:00" {% if form.game_time.value=="21:00:00" %}selected{% endif %}>09:00 PM</option>
+                <option value="09:00:00" {% if schedule.game_time == "09:00:00" %}selected{% endif %}>09:00 AM</option>
+                <option value="12:00:00" {% if schedule.game_time == "12:00:00" %}selected{% endif %}>12:00 PM</option>
+                <option value="15:00:00" {% if schedule.game_time == "15:00:00" %}selected{% endif %}>03:00 PM</option>
+                <option value="18:00:00" {% if schedule.game_time == "18:00:00" %}selected{% endif %}>06:00 PM</option>
+                <option value="21:00:00" {% if schedule.game_time == "21:00:00" %}selected{% endif %}>09:00 PM</option>
             </select>
         </td>
     </tr>
     <tr>
-        <td>{{ form.arena.label_tag }}</td>
-        <td>{{ form.arena }}</td>
+        <td>Arena:</td>
+        <td>
+            <input type="text" name="arena" id="arena" value="{{ schedule.arena }}" />
+        </td>
     </tr>
-
 </table>
+
 <button type="submit" class="btn submit">Schedule Game!</button>
 
 {% csrf_token %}
 </form>
 {% endblock %}
+
+
+{% comment %} {% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    {% if schedule %}
+    <h1>Edit Game: {{ schedule.home_team.name }} vs {{ schedule.away_team.name }}</h1>
+    <form action="{% url 'schedule-update' schedule.id %}" method="post" class="form-container" autocomplete="off">
+        {% else %}
+        <h1>Add a Game to the Schedule</h1>
+        <form action="{% url 'schedule-create' %}" method="post" class="form-container" autocomplete="off">
+            {% endif %}
+            <img src="{% static 'images/coach-logo.png' %}" alt="Coach Logo" />
+</div>
+
+{% if form_errors %}
+<div class="error">
+    <ul>
+        {% for error in form_errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<table>
+    <tr>
+        <td>Select Home Team:</td>
+        <td>
+            <select name="home_team" id="home_team">
+                {% for team in teams %}
+                <option value="{{ team.id }}" {% if schedule.home_team.id == team.id %}selected{% endif %}>{{ team.name }}</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Select Away Team:</td>
+        <td>
+            <select name="away_team" id="away_team">
+                {% for team in teams %}
+                <option value="{{ team.id }}" {% if schedule.away_team.id == team.id %}selected{% endif %}>{{ team.name }}</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Location:</td>
+        <td>
+            <input type="text" name="location" id="location" value="{{ schedule.location }}" />
+        </td>
+    </tr>
+    <tr>
+        <td>Game Date:</td>
+        <td>
+            <input type="date" name="game_date" id="game_date" value="{{ schedule.game_date }}" />
+        </td>
+    </tr>
+    <tr>
+        <td>Game Time:</td>
+        <td>
+            <select name="game_time" id="game_time">
+                <option value="09:00:00" {% if schedule.game_time == "09:00:00" %}selected{% endif %}>09:00 AM</option>
+                <option value="12:00:00" {% if schedule.game_time == "12:00:00" %}selected{% endif %}>12:00 PM</option>
+                <option value="15:00:00" {% if schedule.game_time == "15:00:00" %}selected{% endif %}>03:00 PM</option>
+                <option value="18:00:00" {% if schedule.game_time == "18:00:00" %}selected{% endif %}>06:00 PM</option>
+                <option value="21:00:00" {% if schedule.game_time == "21:00:00" %}selected{% endif %}>09:00 PM</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Arena:</td>
+        <td>
+            <input type="text" name="arena" id="arena" value="{{ schedule.arena }}" />
+        </td>
+    </tr>
+</table>
+
+<button type="submit" class="btn submit">Schedule Game!</button>
+
+{% csrf_token %}
+</form>
+{% endblock %} {% endcomment %}
