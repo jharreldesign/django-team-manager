@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
-from .models import Team, Schedule
+from .models import Team, Schedule, Player
 
 # Team views
 class TeamCreate(CreateView):
@@ -114,3 +114,31 @@ class TeamScheduleList(ListView):
         team = get_object_or_404(Team, id=self.kwargs['team_id'])
         context['team'] = team
         return context
+    
+#Player Views
+class PlayerCreate(CreateView):
+    model = Player
+    fields = ['first_name', 'last_name', 'position', 'number', 'team']
+    success_url = '/players/'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['teams'] = Team.objects.all()
+        return context
+    
+class PlayerUpdate(UpdateView):
+    model = Player
+    fields = ['first_name', 'last_name', 'position', 'number']
+    success_url = '/players/'
+    
+class PlayerDelete(DeleteView):
+    model = Player
+    success_url = '/players/'
+    
+class PlayerList(ListView):
+    model = Player
+    success_url = '/players/'
+    
+class PlayerDetail(DetailView):
+    model = Player
+    template_name = 'players/player_detail.html'

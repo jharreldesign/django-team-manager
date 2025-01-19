@@ -20,7 +20,6 @@
     <header>
         <div class="header-logo-container">
             <a href="/">
-                <!-- <img src="{% static 'images/coach-logo.png' %}" alt="The Team Manager Logo" /> -->
             </a>
         </div>
         <nav>
@@ -29,7 +28,9 @@
                 <li><a href="{% url 'team-create' %}">Add A Team</a></li>
                 <li><a href="{% url 'schedule-list' %}">View Games</a></li>
                 <li><a href="{% url 'schedule-create' %}">Schedule A Game</a></li>
-                <li><a href="{% url 'about' %}">About</a></li>  <!-- You can keep this if needed -->
+                <li><a href="{% url 'player-list' %}">View Players</a></li>
+                <li><a href="{% url 'player-create' %}">Draft A New Player</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
             </ul>
         </nav>        
     </header>

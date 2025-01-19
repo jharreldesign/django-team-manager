@@ -20,4 +20,10 @@ urlpatterns = [
     
     # Optional: Team-specific schedules
     path('teams/<int:team_id>/schedule/', views.TeamScheduleList.as_view(), name='team-schedule'),
+    
+    # Player URLs
+    path('players/', views.PlayerList.as_view(), name='player-list'),
+    path('players/create/', views.PlayerCreate.as_view(), name='player-create'),
+    path('player/<int:pk>/', views.PlayerDetail.as_view(), name='player-detail'),
+    path('players/<int:pk>/update/', views.PlayerUpdate.as_view(), name='player-update')
 ]
