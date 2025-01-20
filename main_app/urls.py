@@ -5,6 +5,11 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
     
+    # Authentication URLs
+    path('login/', views.login_view, name='login'),  # Use custom login view
+    path('logout/', views.logout_view, name='logout'),  # Use custom logout view
+    path('signup/', views.signup, name='signup'),  # Custom signup view
+    
     # Team URLs
     path('teams/', views.team_index, name='team-index'),
     path('teams/<int:team_id>/', views.team_detail, name='team-detail'),
@@ -24,6 +29,7 @@ urlpatterns = [
     # Player URLs
     path('players/', views.PlayerList.as_view(), name='player-list'),
     path('players/create/', views.PlayerCreate.as_view(), name='player-create'),
-    path('player/<int:pk>/', views.PlayerDetail.as_view(), name='player-detail'),
-    path('players/<int:pk>/update/', views.PlayerUpdate.as_view(), name='player-update')
+    path('players/<int:pk>/', views.PlayerDetail.as_view(), name='player-detail'),
+    path('players/<int:pk>/update/', views.PlayerUpdate.as_view(), name='player-update'),
+    path('players/<int:pk>/delete/', views.PlayerDelete.as_view(), name='player-delete'),  # Added PlayerDelete URL
 ]

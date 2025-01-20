@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, authenticate, logout
 from .models import Team, Schedule, Player
 
 # Team views
@@ -19,7 +21,10 @@ class TeamDelete(DeleteView):
     success_url = '/teams/'
 
 def home(request):
-    return render(request, 'home.html')
+    teams = Team.objects.all()
+    if request.user.is_authenticated:
+        return render(request, 'teams/index.html', {'teams': teams, 'is_authenticated': True})
+    return render(request, 'teams/index.html', {'teams': teams, 'is_authenticated': False})
 
 def about(request):
     return render(request, 'about.html')
@@ -44,9 +49,8 @@ class ScheduleCreate(CreateView):
         return context
 
     def form_valid(self, form):
-        # Print form errors for debugging (if any)
         if form.errors:
-            print(form.errors)
+            print(form.errors)  # For debugging form errors
         return super().form_valid(form)
 
 def schedule_update(request, pk):
@@ -78,7 +82,7 @@ def schedule_update(request, pk):
     return render(request, 'schedule_form.html', {
         'teams': teams,
         'schedule': schedule,
-        'form_errors': []  # If there are any form errors, they should be passed here
+        'form_errors': []  # Add form errors if there are any
     })
 
 class ScheduleList(ListView):
@@ -90,7 +94,7 @@ class ScheduleDetail(DetailView):
 class ScheduleUpdate(UpdateView):
     model = Schedule
     fields = ['home_team', 'away_team', 'location', 'arena', 'game_date', 'game_time']
-    success_url = '/schedule/'  # Redirects after the form is successfully updated
+    success_url = '/schedule/'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -114,8 +118,8 @@ class TeamScheduleList(ListView):
         team = get_object_or_404(Team, id=self.kwargs['team_id'])
         context['team'] = team
         return context
-    
-#Player Views
+
+# Player views
 class PlayerCreate(CreateView):
     model = Player
     fields = ['first_name', 'last_name', 'position', 'number', 'team']
@@ -130,15 +134,42 @@ class PlayerUpdate(UpdateView):
     model = Player
     fields = ['first_name', 'last_name', 'position', 'number']
     success_url = '/players/'
-    
+
 class PlayerDelete(DeleteView):
     model = Player
     success_url = '/players/'
-    
+
 class PlayerList(ListView):
     model = Player
     success_url = '/players/'
-    
+
 class PlayerDetail(DetailView):
     model = Player
     template_name = 'players/player_detail.html'
+
+# User authentication views
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/signup.html', {'form': form})
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'registration/login.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')

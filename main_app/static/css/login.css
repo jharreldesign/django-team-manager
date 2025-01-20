@@ -1,0 +1,87 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    font-size: 2.5rem; /* Increased size */
+    text-align: center;
+    margin-bottom: 30px; /* Increased spacing */
+    color: #333; /* Darker color for better contrast */
+}
+
+/* Login Container */
+.login-container {
+    width: 100%;
+    max-width: 500px; /* Increased container width */
+    margin: 80px auto; /* Increased margin for a more centered look */
+    background-color: #fff;
+    padding: 40px; /* Increased padding for a larger container */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px; /* Increased margin */
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 10px; /* Increased label spacing */
+    display: block;
+    font-size: 1.2rem; /* Increased label font size */
+}
+
+.form-group input {
+    width: 100%;
+    padding: 15px; /* Increased input padding */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1.2rem; /* Increased input font size */
+}
+
+.form-group input:focus {
+    border-color: #5c9f8f;
+    outline: none;
+}
+
+button {
+    background-color: #5c9f8f; /* Darker, more visible button color */
+    color: white;
+    padding: 15px 0; /* Increased padding */
+    border: none;
+    border-radius: 4px;
+    font-size: 1.2rem; /* Increased button font size */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #4d8a7d; /* A slightly darker hover effect */
+}
+
+
+/* Sign Up Link */
+.signup-link {
+    text-align: center;
+    font-size: 1.1rem; /* Increased font size */
+    margin-top: 20px; /* Increased spacing */
+}
+
+.signup-link a {
+    color: #5c9f8f;
+    text-decoration: none;
+    font-weight: bold; /* Added bold for emphasis */
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}

@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
-
     <link rel="shortcut icon" type="image/png" href="{% static 'images/coach-logo.png' %}">
 
     <title>Team Manager</title>
@@ -19,7 +18,8 @@
 <body>
     <header>
         <div class="header-logo-container">
-            <a href="/">
+            <a href="{% url 'home' %}">
+                {% comment %} <img src="{% static 'images/coach-logo.png' %}" alt="Team Manager Logo"> {% endcomment %}
             </a>
         </div>
         <nav>
@@ -31,6 +31,13 @@
                 <li><a href="{% url 'player-list' %}">View Players</a></li>
                 <li><a href="{% url 'player-create' %}">Draft A New Player</a></li>
                 <li><a href="{% url 'about' %}">About</a></li>
+                <!-- Authentication Links -->
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                {% endif %}
             </ul>
         </nav>        
     </header>
