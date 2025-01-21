@@ -3,13 +3,79 @@
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/home.css' %}" />
 {% endblock %}
+
 {% block content %}
+<section class="dashboard-container">
+    <!-- Welcome Section -->
+    <section class="dashboard-header">
+        <div class="team-container">
+            <img src="{% static 'images/coach-logo.png' %}" alt="The Coaches Logo" class="logo">
+        </div>
+        <h1>Welcome to Team Manager!</h1>
+        <p>Manage your teams, schedule games, and draft players with ease.</p>
+    </section>
 
-<section class="logo-container">
-    <div class="team-container">
-        <img src="{% static 'images/coach-logo.png' %}" alt="The Coaches Large Image" />
-    </div>
-    <img src="{% static 'images/coach-logo.png' %}" alt="The Coaches Large Image" />
+    <!-- Dashboard Grid Section -->
+    <section class="dashboard-grid">
+        <!-- Teams Section -->
+        <div class="dashboard-card">
+            <h2>Teams</h2>
+            <ul>
+                {% for team in teams %}
+                    <li>
+                        <img src="{{ team.logo_url }}" alt="{{ team.name }} logo" class="team-logo">
+                        {{ team.name }}
+                    </li>
+                {% endfor %}
+            </ul>
+            {% if user.is_authenticated %}
+                <a href="{% url 'team-create' %}" class="btn secondary">Create a Team</a>
+            {% endif %}
+        </div>
+
+        <!-- Players Section -->
+        <div class="dashboard-card">
+            <h2>Players</h2>
+            <ul>
+                {% for player in players %}
+                    <li>{{ player.first_name }} {{ player.last_name }} - {{ player.position }}</li>
+                {% endfor %}
+            </ul>
+            {% if user.is_authenticated %}
+                <a href="{% url 'player-create' %}" class="btn secondary">Add a Player</a>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Full Width for Games Section -->
+    <section class="games-section">
+        <h2>Upcoming Games</h2>
+        <ul>
+            {% for schedule in schedules %}
+                <li class="game-item">
+                    <div class="game-details">
+                        <div class="team home-team">
+                            <img src="{{ schedule.home_team.logo_url }}" alt="{{ schedule.home_team.name }} logo" class="team-logo">
+                            <span>{{ schedule.home_team.name }}</span>
+                        </div>
+                        <div class="vs">
+                            <span>VS</span>
+                        </div>
+                        <div class="team away-team">
+                            <img src="{{ schedule.away_team.logo_url }}" alt="{{ schedule.away_team.name }} logo" class="team-logo">
+                            <span>{{ schedule.away_team.name }}</span>
+                        </div>
+                    </div>
+                    <div class="game-info">
+                        <span>{{ schedule.game_date }} at {{ schedule.game_time }}</span>
+                        <span>{{ schedule.location }} - {{ schedule.arena }}</span>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        {% if user.is_authenticated %}
+            <a href="{% url 'schedule-create' %}" class="btn secondary">Schedule a Game</a>
+        {% endif %}
+    </section>
 </section>
-
 {% endblock %}

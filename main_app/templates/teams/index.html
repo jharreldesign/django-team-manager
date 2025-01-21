@@ -5,26 +5,6 @@
 {% endblock %}
 {% block content %}
 
-<section class="card-container">
-    {% for team in teams %}
-    <div class="card">
-        <a href="{% url 'team-detail' team.id %}">
-            <div class="card-img-container">
-                {% if team.logo_url %}
-                    <img src="{{ team.logo_url }}" alt="{{ team.name }} Logo" />
-                {% else %}
-                    <img src="{% static 'images/coach-logo.png' %}" alt="Default Coaches Logo" />
-                {% endif %}
-            </div>
-            <div class="card-content">
-                <h2 class="card-title">{{ team.city }} {{ team.name }}</h2>
-                <p><strong>Sport: </strong>{{ team.sport }}</p>
-            </div>
-        </a>
-    </div>
-    {% endfor %}
-</section>
-
 {% if user.is_authenticated %}
     <p>Welcome, {{ user.username }}!</p>
     <form method="post" action="{% url 'logout' %}">
@@ -52,5 +32,27 @@
         </form>
     </div>
 {% endif %}
+
+<section class="card-container">
+    {% for team in teams %}
+    <div class="card">
+        <a href="{% url 'team-detail' team.id %}">
+            <div class="card-img-container">
+                {% if team.logo_url %}
+                    <img src="{{ team.logo_url }}" alt="{{ team.name }} Logo" />
+                {% else %}
+                    <img src="{% static 'images/coach-logo.png' %}" alt="Default Coaches Logo" />
+                {% endif %}
+            </div>
+            <div class="card-content">
+                <h2 class="card-title">{{ team.city }} {{ team.name }}</h2>
+                <p><strong>Sport: </strong>{{ team.sport }}</p>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</section>
+
+
 
 {% endblock %}

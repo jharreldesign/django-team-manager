@@ -1,87 +1,132 @@
-main {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    height: 100%;
-  }
-  
-  main > section {
-    width: 100%;
-    padding: 10px 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-  
-  .header-logo-container {
-    display: none;
-  }
-  
-  .logo-container {
-    max-width: 375px;
-  }
-  
-  .team-container {
-    width: 80%;
-  }
-  
-  .login {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 80%;
-  }
-  
-  .login h1 {
-    font-size: clamp(3.2rem, 3vw, 4.8rem);
-    margin: 10px 0;
-  }
-  
-  .login > p {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin: 14px 0 0px;
-  }
-  
-  .login label {
-    font-size: var(--font-reg);
-    margin-bottom: 6px;
-  }
-  
-  .login input {
-    font-size: var(--font-l);
-    padding: 2px 4px;
-  }
-  
-  .login .btn {
-    align-self: flex-end;
-    margin-right: 0;
-    margin-top: 16px;
-  }
-  
-  @media only screen and (min-width: 768px) {
-    main {
-      justify-content: space-around;
-    }
-  
-    main > section {
-      width: 40%;
-    }
-  
-    .login {
-      border: var(--borders);
-      padding: 20px;
-      border-radius: var(--card-border-radius);
-      box-shadow: var(--card-box-shadow);
-      width: 100%;
-    }
-  
-    .logo-container {
-      max-width: 520px;
-    }
-  }
-  
+.dashboard-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.dashboard-header .logo {
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Split top half into two columns */
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.dashboard-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard-card h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.dashboard-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dashboard-card ul li {
+  margin-bottom: 8px;
+  font-size: 1rem;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.team-logo {
+  max-width: 80px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.dashboard-card ul li span {
+  display: block;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* Games Section */
+.games-section {
+  width: 100%;
+  margin-top: 40px;
+}
+
+.games-section h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.games-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.game-item {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.game-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.team {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.team-logo {
+  max-width: 100px;
+  margin-right: 10px;
+}
+
+.vs {
+  font-weight: bold;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #555;
+}

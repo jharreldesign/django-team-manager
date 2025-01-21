@@ -25,11 +25,13 @@
         <nav>
             <ul>
                 <li><a href="{% url 'team-index' %}">Teams</a></li>
-                <li><a href="{% url 'team-create' %}">Add A Team</a></li>
-                <li><a href="{% url 'schedule-list' %}">View Games</a></li>
-                <li><a href="{% url 'schedule-create' %}">Schedule A Game</a></li>
-                <li><a href="{% url 'player-list' %}">View Players</a></li>
-                <li><a href="{% url 'player-create' %}">Draft A New Player</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'team-create' %}">Teams</a></li>
+                    <li><a href="{% url 'schedule-create' %}">Schedule A Game</a></li>
+                    <li><a href="{% url 'player-create' %}">Draft A New Player</a></li>
+                {% endif %}
+                <li><a href="{% url 'schedule-list' %}">Games</a></li>
+                <li><a href="{% url 'player-list' %}">Players</a></li>
                 <li><a href="{% url 'about' %}">About</a></li>
                 <!-- Authentication Links -->
                 {% if user.is_authenticated %}
@@ -39,7 +41,8 @@
                     <li><a href="{% url 'signup' %}">Sign Up</a></li>
                 {% endif %}
             </ul>
-        </nav>        
+        </nav>
+        
     </header>
     <main>
         {% block content %}
