@@ -1,0 +1,39 @@
+.player-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.player-img img {
+    width: 150 px;
+    height: 150 px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.player-details {
+    flex: 1;
+}
+
+.player-details h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+.player-details p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.player-actions {
+    margin-top: 20px;
+}
+
+.player-actions .btn {
+    margin-right: 10px;
+}

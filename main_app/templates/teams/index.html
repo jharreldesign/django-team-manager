@@ -5,34 +5,6 @@
 {% endblock %}
 {% block content %}
 
-{% if user.is_authenticated %}
-    <p>Welcome, {{ user.username }}!</p>
-    <form method="post" action="{% url 'logout' %}">
-        {% csrf_token %}
-        <button type="submit">Log out</button>
-    </form>
-{% else %}
-    <!-- Login Form -->
-    <div class="login-container">
-        <h3>Login</h3>
-        <form method="post" action="{% url 'login' %}">
-            {% csrf_token %}
-            {{ form.as_p }}  <!-- Ensure 'form' is passed in the context in your view -->
-            <button type="submit">Login</button>
-        </form>
-    </div>
-
-    <!-- Signup Form -->
-    <div class="signup-container">
-        <h3>Sign Up</h3>
-        <form method="post" action="{% url 'signup' %}">
-            {% csrf_token %}
-            {{ signup_form.as_p }}  <!-- Ensure 'signup_form' is passed in the context in your view -->
-            <button type="submit">Sign Up</button>
-        </form>
-    </div>
-{% endif %}
-
 <section class="card-container">
     {% for team in teams %}
     <div class="card">

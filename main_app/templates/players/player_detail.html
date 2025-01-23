@@ -1,0 +1,39 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link rel="stylesheet" href="{% static 'css/players/player-detail.css' %}" />
+{% endblock %} 
+
+{% block content %}
+<section class="player-container">
+  <div class="player-img">
+    {% if player.headshot %}
+    <img
+      src="{{ player.headshot }}"
+      alt="{{ player.first_name }} {{ player.last_name }}"
+      Profile Picture
+    />
+    {% else %}
+    <img
+      src="{% static 'images/coach-logo.png' %}"
+      alt="Default player profile picture" Picture
+    />
+    {% endif %}
+  </div>
+  <div class="player-details">
+    <h1>{{ player.first_name }} {{ player.last_name }}</h1>
+    <p><strong>Position: </strong>{{ player.position }}</p>
+    <p><strong>Jersey Number: </strong> {{player.number }}</p>
+    <p><strong>Team: </strong>
+        {% if player.team %}
+            <a href="{% url 'team-detail' player.team.id %">{{ player.team.name }}</a>
+        {% else %}
+            No team assigned.
+        {% endif %}
+    </p>
+  </div>
+</section>
+
+<div class="player-actions">
+    <a href="{% url 'player-update' player.id %}" class="brn warn">Edit</a>
+    <a href="{% url 'player-delete' player.id %}" class="btn danger">Delete</a>
+</div>
+{% endblock %}

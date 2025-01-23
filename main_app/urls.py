@@ -31,5 +31,5 @@ urlpatterns = [
     path('players/create/', views.PlayerCreate.as_view(), name='player-create'),
     path('players/<int:pk>/', views.PlayerDetail.as_view(), name='player-detail'),
     path('players/<int:pk>/update/', views.PlayerUpdate.as_view(), name='player-update'),
-    path('players/<int:pk>/delete/', views.PlayerDelete.as_view(), name='player-delete'),  # Added PlayerDelete URL
+    path('players/<int:pk>/delete/', views.PlayerDelete.as_view(), name='player-delete'),  
 ]

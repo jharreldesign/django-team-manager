@@ -25,6 +25,7 @@ class Player(models.Model):
     position = models.CharField(max_length=255)
     number = models.IntegerField()
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='players')
+    headshot = models.URLField(max_length=500, blank=True, null=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.position} - #{self.number}"

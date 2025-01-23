@@ -38,11 +38,23 @@
             <h2>Players</h2>
             <ul>
                 {% for player in players %}
-                    <li>{{ player.first_name }} {{ player.last_name }} - {{ player.position }}</li>
+                    <li class="player-item">
+                        <div class="player-headshot">
+                            {% if player.headshot %}
+                                <img src="{{ player.headshot }}" alt="{{ player.first_name}} {{ player.last_name}}"
+                                />
+                            {% else %}
+                                <img src="{% static 'images/coach-logo.png' %}" alt="">
+                            {% endif %}
+                        </div>
+                        <div class="player-info">
+                            <span>{{ player.first_name }} {{ player.last_name }}</span> - <span>{{player.position }}</span>
+                        </div>
+                    </li>
                 {% endfor %}
             </ul>
             {% if user.is_authenticated %}
-                <a href="{% url 'player-create' %}" class="btn secondary">Add a Player</a>
+                <a href="{% url 'player-create' %}" class="btn-secondary">Add A Player</a>
             {% endif %}
         </div>
     </section>

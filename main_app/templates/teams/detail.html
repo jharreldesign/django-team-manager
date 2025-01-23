@@ -33,6 +33,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>Headshot</th>
                     <th>Number</th>
                     <th>First Name</th>
                     <th>Last Name</th>
@@ -42,6 +43,22 @@
             <tbody>
                 {% for player in team.players.all %}
                 <tr>
+                    <td>
+                        <div class="player-img">
+                            {% if player.headshot %}
+                            <img
+                              src="{{ player.headshot }}"
+                              alt="{{ player.first_name }} {{ player.last_name }}"
+                              Profile Picture
+                            />
+                            {% else %}
+                            <img
+                              src="{% static 'images/coach-logo.png' %}"
+                              alt="Default player profile picture" Picture
+                            />
+                            {% endif %}
+                          </div>
+                    </td>
                     <td>{{ player.number }}</td>
                     <td>{{ player.first_name }}</td>
                     <td>{{ player.last_name }}</td>

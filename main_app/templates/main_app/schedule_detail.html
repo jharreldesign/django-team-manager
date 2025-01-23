@@ -1,0 +1,77 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/schedules/schedule-detail.css' %}"
+/>
+{% endblock %} 
+{% block content %}
+
+<section class="page-header">
+  <h1>Tonight's Matchup</h1>
+</section>
+
+<!-- Game header section -->
+<nav class="game-header">
+  <div class="game-header-team home-team">
+    <img class="team-logo" src="{{ schedule.home_team.logo_url }}" alt="" />
+    <span class="team-name">{{ schedule.home_team.name }}</span>
+  </div>
+
+  <div class="game-header-info">
+    <span class="game-date-time"
+      >{{ schedule.game_date }} | {{ schedule.game_time}}
+    </span>
+    <span class="vs">VS</span>
+  </div>
+
+  <div class="game-header-team away-team">
+    <span class="team-name">{{ schedule.away_team.name }}</span>
+    <img class="team-logo" src="{{ schedule.away_team.logo_url }}" alt="" />
+  </div>
+</nav>
+
+<!-- Team Roster Section -->
+
+<section class="page-header">
+  <h1>All Players</h1>
+</section>
+
+<!-- Home Team Roster -->
+<section class="roster-container">
+    <div class="roster home-roster">
+        <h2>{{ schedule.home_team.name }} Roster</h2>
+        <div class="player-list">
+            {% for player in schedule.home_team.players.all %}
+            <div class="player-card">
+                <a href="{% url 'player-detail' player.id %}">
+                    <img src="{{ player.headshot }}" alt="" />
+                    <p>Number: {{ player.number }}</p>
+                    <h3>
+                        {{ player.number }} - {{ player.first_name }} {{ player.last_name }}
+                    </h3>
+                    <p>Position: {{ player.position }}</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="roster away-roster">
+        <h2>{{ schedule.away_team.name }} Roster</h2>
+        <div class="player-list">
+            {% for player in schedule.away_team.players.all %}
+            <div class="player-card">
+                <a href="{% url 'player-detail' player.id %}">
+                    <img src="{{ player.headshot }}" alt="" />
+                    <p>Number: {{ player.number }}</p>
+                    <h3>
+                        {{ player.number }} - {{ player.first_name }} {{ player.last_name }}
+                    </h3>
+                    <p>Position: {{ player.position }}</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
